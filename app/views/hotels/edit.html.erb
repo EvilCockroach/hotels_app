@@ -1,0 +1,54 @@
+<%= form_for(@hotel, url: hotel_path(@hotel), html: { method: :PUT }) do |f| %>
+  <% if @hotel.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@hotel.errors.count, "error") %> prohibited
+      this hotel from being saved:</h2>
+    <ul>
+    <% @hotel.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+  <fieldset>
+  <p class="some-class">
+    <% (1..5).each do |i| %>
+    <% if @mark == i then %>
+<%= label_tag(:rating, i) %>
+<%= radio_button_tag(:user_hotel, i, :checked => "checked") %>
+<% else %>
+<%= label_tag(:rating, i) %>
+<%= radio_button_tag(:user_hotel, i) %>
+      <% end end %>   
+ </p>
+</fieldset>
+
+ <p>
+    <%= f.label :address, :country %><br>
+    <%= text_field :address, :country, value: @address[:country]%>
+  </p>
+   <p>
+    <%= f.label :address, :state %><br>
+    <%= text_field :address, :state, value: @address[:state]%>
+  </p>
+   <p>
+    <%= f.label :address, :city %><br>
+    <%= text_field :address, :city, value: @address[:city]%>
+  </p>
+   <p>
+    <%= f.label :address, :street %><br>
+    <%= text_field :address, :street, value: @address[:street]%>
+  </p>
+<!-- hidden_field_tag :model_id, params[:model_id] -->
+
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ 
+<%= link_to 'Back', hotels_path %>

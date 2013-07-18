@@ -1,0 +1,49 @@
+<% provide(:title, 'New hotel') %>
+<h1>Add a hotel</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+
+
+<%= form_tag :action => 'create' %>
+
+<p>
+  Hotel title (necessary):
+  <%= text_field :hotel, :title %>
+</p>
+<p>
+  Rate this hotel (necessary):
+  <%= text_field :user_hotel, :rating %>
+</p>
+<p>
+  You can leave a short description
+  <%= text_field :user_hotel, :comment %>
+</p>
+
+Please fill in the address  
+<p>
+  Country:
+  <%= text_field :address, :country %>
+</p>
+<p>
+  State:
+  <%= text_field :address, :state %>
+</p>
+<p>
+  City:
+  <%= text_field :address, :city %>
+</p>
+<p>
+  Street:
+  <%= text_field :address, :street %>
+</p>
+
+<p>
+  <%= submit_tag 'Create' , class: "btn btn-large btn-primary" %>
+</p>
+<%= form_tag %>
+
+
+  </div>
+</div>
+

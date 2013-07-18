@@ -1,0 +1,20 @@
+<% provide(:title, @hotel.title) %>
+<div class="row">
+ 
+    <section>
+      <h1>
+      	<%= @hotel.title %>
+      </h1>
+      	<h2> <% if !@address2.blank?     %>
+      		<%=  "Address:" %>
+
+      		<%= @address2  %> 
+		 	<%  else %>
+		 <%= "We have no address yet for this hotel. You can add it " %>
+			<%= link_to 'here:', edit_hotel_path(@hotel.id) %>		
+<%  end %>
+		
+		<h2>
+      </section>
+ 
+</div>

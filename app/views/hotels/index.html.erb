@@ -1,0 +1,16 @@
+<% provide(:title, "Hotels") %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h3>
+
+      	We have information about these hotels
+
+      	<%  @hotels.each do |h|  %>
+      	<%= link_to h.title, hotel_path(h.id) %>
+      	<br>
+      	<% end %>
+      </h3>
+      </section>
+  </aside>
+</div>
