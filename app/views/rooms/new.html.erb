@@ -1,0 +1,27 @@
+<% provide(:title, 'New room') %>
+<h1>Add some description</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+<%= form_for(@room)  do |f| %>
+     
+
+      <%= f.label :room_type %>
+      <%= f.text_field :room_type %>
+
+      <%= f.label :price %>
+      <%= f.text_field :price %>
+
+      <p>
+      Included breakfast 
+      <%= f.check_box :breakfast_included %>
+      </p>
+      
+      
+
+      
+      <%= f.submit "Add", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+

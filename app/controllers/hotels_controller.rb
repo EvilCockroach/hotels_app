@@ -57,11 +57,17 @@ def update
 
   @hotel = Hotel.find(params[:id])
 @userhotel = UserHotel.find_by_hotel_id_and_user_id(params[:id], current_user.id)
-@hotel.star_rating += (params[:user_hotel].to_i - @userhotel[:rating].to_i)
+@hotel.star_rating += (params[:user_hotel]).to_i
 @hotel.address = Address.find_by_hotel_id(params[:id])
+if !@userhotel.blank?
+ @hotel.star_rating -= (@userhotel[:rating]).to_i
+else
+ @userhotel = UserHotel.new(:rating => params[:user_hotel].to_i, :hotel_id => params[:id], :user_id => current_user.id)
+end
+
   if (@hotel.update_attributes(:title => params[:hotel][:title], :star_rating => @hotel.star_rating) 
-     @userhotel.update_attributes(:rating => params[:user_hotel].to_i)
-     @hotel.address.update_attributes(params[:address]))
+     @hotel.address.update_attributes(params[:address])
+  @userhotel.update_attributes(:rating => params[:user_hotel].to_i, :hotel_id => params[:id], :user_id => current_user.id))
 
     flash[:success] = "Information updated"
     redirect_to @hotel

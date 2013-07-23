@@ -4,9 +4,9 @@
     <section>
       <h3>
 
-      	We have information about these hotels
+      	Best five hotels
 
-      	<%  @hotels.each do |h|  %>
+      	<%  @hotelsordered.each do |h|  %>
       	<%= link_to h.title, hotel_path(h.id) %>
       	<br>
       	<% end %>

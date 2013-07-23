@@ -5,9 +5,11 @@ HotelsApp::Application.routes.draw do
  
 #put '/hotels/:id/details' => 'hotels#details', :as => 'hotel_details'
 #link_to 'hotel_details', hotel_details_path(hotels.id)
-
+#resources :rooms
   resources :users
-  resources :hotels
+  resources :hotels do 
+  resources :rooms
+  end
 resources :sessions, only: [:new, :create, :destroy]
 
  root to: 'static_pages#home'
