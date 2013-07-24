@@ -2,7 +2,8 @@
 
 def index
     @room = Room.find_all_by_hotel_id(params[:hotel_id])
-    #.order('price DESC')
+    @roomSortedByPrice = @room.sort_by{ |k| k["price"] }.reverse
+    
     
   end
 

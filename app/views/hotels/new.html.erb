@@ -5,7 +5,7 @@
   <div class="span6 offset3">
 
 
-<%= form_tag :action => 'create' %>
+<%= form_tag :action => 'create', :html => {:multipart => true}%>
 
 <p>
   Hotel title (necessary):
@@ -19,7 +19,9 @@
   You can leave a short description
   <%= text_field :user_hotel, :comment %>
 </p>
-
+<p>
+<%= file_field :hotel, :hphoto %>
+</p>
 Please fill in the address  
 <p>
   Country:

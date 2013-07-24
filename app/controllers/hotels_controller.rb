@@ -34,6 +34,7 @@ end
 
     @hotel = Hotel.new(params[:hotel].merge(:star_rating => params[:user_hotel][:rating], :rates_count => 1))
     @hotel.address = Address.new(params[:address])
+    @hotel.hphoto = params[:file]
       
   if @hotel.save
     @user_hotel = UserHotel.new(params[:user_hotel].merge(:hotel_id => @hotel[:id], :user_id => current_user.id))

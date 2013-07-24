@@ -5,13 +5,27 @@
 
       	This hotel propose you these rooms.
         </h3>
-        <br>
-      </br>
-<div class = "image-reference">
+        
 
-      	<%  @room.each do |r|  %>
+
+      	<%  @roomSortedByPrice.each do |r|  %>
+
+        <div style = "float:left; margin-bottom:20px;">
+          <div style = "height:150px; width:300px;">
+
         <%= link_to image_tag(r.photo_url(:thumb)), 
         hotel_room_path(params[:hotel_id], r.id) %>
+        </div>
+        
+          <%= (r.room_number.to_s << "." << r.room_type << " - " <<
+ r.price.to_s << "$ per day.") %>        
+        
+      </div>
+
+    
+
+        
+
       
 
       	
