@@ -7,7 +7,7 @@
       	Best five hotels
 
       	<%  @hotelsordered.each do |h|  %>
-      	<%= link_to h.title, hotel_path(h.id) %>
+      	<%= link_to h.title, hotel_path(h.id) %> (<%= (h.star_rating/h.rates_count).round(2) %>)
       	<br>
       	<% end %>
       </h3>

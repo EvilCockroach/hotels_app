@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716155949) do
+ActiveRecord::Schema.define(:version => 20130724145836) do
 
   create_table "addresses", :force => true do |t|
     t.string   "country"
@@ -45,7 +45,8 @@ ActiveRecord::Schema.define(:version => 20130716155949) do
     t.boolean  "breakfast_included"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "breakfast"
+    t.string   "photo"
+    t.integer  "room_number"
   end
 
   create_table "user_hotels", :force => true do |t|

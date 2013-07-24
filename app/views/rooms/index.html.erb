@@ -1,0 +1,22 @@
+<% provide(:title, "Rooms") %>
+
+  
+      <h3>
+
+      	This hotel propose you these rooms.
+        </h3>
+        <br>
+      </br>
+<div class = "image-reference">
+
+      	<%  @room.each do |r|  %>
+        <%= link_to image_tag(r.photo_url(:thumb)), 
+        hotel_room_path(params[:hotel_id], r.id) %>
+      
+
+      	
+      	<% end %>
+        </div>
+      
+     
+

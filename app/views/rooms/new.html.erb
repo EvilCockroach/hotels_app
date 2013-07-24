@@ -3,25 +3,29 @@
 
 <div class="row">
   <div class="span6 offset3">
-<%= form_for(@room)  do |f| %>
-     
+<%= form_for @room, :url => hotel_rooms_path,
+ :html => {:multipart => true} do |f| %>
+   
+
 
       <%= f.label :room_type %>
       <%= f.text_field :room_type %>
 
-      <%= f.label :price %>
+      <%= f.label :room, :price %>
       <%= f.text_field :price %>
 
       <p>
       Included breakfast 
       <%= f.check_box :breakfast_included %>
       </p>
-      
-      
 
+      <%= f.file_field :photo %>
+      <p></p>
       
-      <%= f.submit "Add", class: "btn btn-large btn-primary" %>
-    <% end %>
+     
+      
+      <%= submit_tag 'Add', class: "btn btn-large btn-primary" %>
+   <% end %>
   </div>
 </div>
 

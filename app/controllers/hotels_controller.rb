@@ -1,6 +1,7 @@
 class HotelsController < ApplicationController
   def index
     @hotels = Hotel.all
+    @hotelsordered = Hotel.order('star_rating/rates_count DESC').limit(5)
   end
 
   def show

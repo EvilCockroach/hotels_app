@@ -1,10 +1,16 @@
-<% provide(:title, "Room N#{@room.id}") %>
-<div class="row">
-  <aside class="span4">
-    <section>
+<% provide(:title, "Room N#{@room.room_number}") %>
+<div >
+  
+    
       <h1>
-      	<%= "Room N#{@room.id}" %>
+      	<%= "Room N#{@room.room_number}" %>
       </h1>
-      </section>
-  </aside>
+      <%= image_tag @room.photo_url %>
+	
+	<br>
+      Room type: <%= @room.room_type %>
+      <br>
+      Price: <%= @room.price %>
+      
+  
 </div>

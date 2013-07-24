@@ -1,3 +1,11 @@
+<script type="text/JavaScript">
+<!--
+function timedRedirect(redirectTo, timeoutPeriod)
+{
+    setTimeout("location.href = redirectTo;",timeoutPeriod);
+}
+//-->
+</script>
 <div class="center hero-unit">
   <h1>Welcome to the Hotels App</h1>
 
@@ -6,8 +14,14 @@
     This is the home page for the
     hotels advisor application.
   </h2>
+  <% if !current_user.blank? %>
 
+<meta HTTP-EQUIV="REFRESH" content="10; url=<%= hotels_path %>">
+You are already authenticated and will be redirected in 10 seconds to main page
+ 
+<% else %>
  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+ <% end %>
 </div>
 
 <%= link_to image_tag("rails.png", alt: "google"), 'http://google.com/' %>
