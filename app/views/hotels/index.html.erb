@@ -1,16 +1,28 @@
 <% provide(:title, "Hotels") %>
 <div class="row">
-  <aside class="span4">
-    <section>
+  
       <h2>
 
       	Best five hotels
 </h2>
+
+
+
+        
+
+        
+        
+
       	<%  @hotelsordered.each do |h|  %>
-      	<%= link_to h.title, hotel_path(h.id) %> (<%= (h.star_rating/h.rates_count).round(2) %>)
-      	<br>
+        <div style = "float:left; margin-bottom:20px;">
+           <div style = "height:150px; width:300px;">
+      	     <%= link_to image_tag(h.hphoto_url(:thumb)), 
+             hotel_path(h.id) %>
+           </div>
+           <%= h.title %> 
+           (<%= (h.star_rating/h.rates_count).round(2) %>)
+      	</div>
       	<% end %>
       
-      </section>
-  </aside>
+     
 </div>

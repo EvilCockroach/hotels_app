@@ -34,7 +34,7 @@ end
 
     @hotel = Hotel.new(params[:hotel].merge(:star_rating => params[:user_hotel][:rating], :rates_count => 1))
     @hotel.address = Address.new(params[:address])
-    @hotel.hphoto = params[:file]
+    @hotel.hphoto = params[:hotel][:hphoto]
       
   if @hotel.save
     @user_hotel = UserHotel.new(params[:user_hotel].merge(:hotel_id => @hotel[:id], :user_id => current_user.id))
@@ -49,6 +49,7 @@ end
 
 def edit
   @hotel = Hotel.find(params[:id])
+
   @mark_ = UserHotel.find_by_hotel_id_and_user_id(params[:id], current_user.id)
   if !@mark_.blank?  then                     
                        @mark = @mark_[:rating] end
@@ -58,6 +59,7 @@ end
 def update 
 
   @hotel = Hotel.find(params[:id])
+  @hotel.hphoto = params[:file]
 @userhotel = UserHotel.find_by_hotel_id_and_user_id(params[:id], current_user.id)
 @hotel.star_rating += (params[:user_hotel]).to_i
 @hotel.address = Address.find_by_hotel_id(params[:id])
@@ -70,7 +72,7 @@ end
   if (@hotel.update_attributes(:title => params[:hotel][:title], :star_rating => @hotel.star_rating) 
      @hotel.address.update_attributes(params[:address])
   @userhotel.update_attributes(:rating => params[:user_hotel].to_i, :hotel_id => params[:id], :user_id => current_user.id))
-
+@hotel.save
     flash[:success] = "Information updated"
     redirect_to @hotel
   else
@@ -79,14 +81,6 @@ end
   end
 end
 
-#def update
-#    @hotel = Hotel.find(params[:id])
-  #  @hotel.address = Address.new(params[:address])
-  #    if @hotel.address.update(params[:address])
-  #   render :action => 'new'
- # else
-  #  render :action => 'new'
- # end
-#end
+
 
 end
