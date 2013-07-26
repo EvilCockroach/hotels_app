@@ -2,9 +2,19 @@
 
   
       <h3>
-
+        <% if !@roomSortedByPrice.blank? %>
       	This hotel propose you these rooms.
+        <% else %>
+        Sorry, no rooms added yet
+        <% end %>
         </h3>
+
+        <div>
+          <p>
+            You can add a
+            <%= link_to " new room ", new_hotel_room %> to this list
+          </p>
+        </div>
         
 
 

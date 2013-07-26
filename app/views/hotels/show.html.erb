@@ -1,20 +1,61 @@
 <% provide(:title, @hotel.title) %>
-<div class="row">
+<div>
  
     <section>
       <h1>
       	<%= @hotel.title %>
       </h1>
-      	<h2> <% if !@address2.blank?     %>
+      	<h2>
+          <p>Rating : <%=@hotel.star_rating/@hotel.rates_count%>
+            (Your rating: <%=@rating%>)
+          </p>
+         <% if !@address2.blank?     %>
       		<%=  "Address:" %>
 
       		<%= @address2  %> 
 		 	<%  else %>
-		 <%= "We have no address yet for this hotel. You can add it " %>
-			<%= link_to 'here:', edit_hotel_path(@hotel.id) %>		
-<%  end %>
-		
-		<h2>
-      </section>
- 
+		 <%= "No address, sorry " %>	
+     			<%  end %>	
+          	
+		</h2>
+    </section>
+    <div style = "text-align:center">
+    <%= image_tag(@hotel.hphoto_url) %>
+      </div>
+      <div style = "text-align:center">
+      <p>
+      <%= link_to "Click here", hotel_rooms_path(params[:id])%> to show rooms of this hotel
+     </p> 
+   </div>
+      <br>
+      <div style = "text-align:center">
+    <div style = "text-align:center">
+<% @userhotel.each do |u| if !u.comment.blank? then %>
+
+<div>
+  <br>
+  <p class = "gray-small">
+    <%= user_by_user_id(u) %> left this comment:
+  </p>
+  <p class = "bordered">
+<%= u.comment %>
+</p>
 </div>
+<%  else %>
+<p class = "gray-small">
+   No comments yet
+  </p>
+  <% end end %>
+</div>
+<br>
+<br>
+<div>
+  <%= "If you want to change some information or add a comment you can do this " %>
+      <%= link_to 'here:', edit_hotel_path(@hotel.id) %>
+  <div>
+
+
+</div>
+
+      
+ 

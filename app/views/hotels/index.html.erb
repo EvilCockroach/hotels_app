@@ -1,17 +1,10 @@
 <% provide(:title, "Hotels") %>
-<div class="row">
+<div style = "margin-left:30px">
   
       <h2>
 
       	Best five hotels
-</h2>
-
-
-
-        
-
-        
-        
+</h2>       
 
       	<%  @hotelsordered.each do |h|  %>
         <div style = "float:left; margin-bottom:20px;">
@@ -24,5 +17,13 @@
       	</div>
       	<% end %>
       
-     
 </div>
+
+</div>
+<div><p>Other hotels (in alphabetic)</p>
+      <%  @otherhotels.each do |h|  %>
+      <%= link_to h.title, 
+             hotel_path(h.id) %>
+      (<%= (h.star_rating/h.rates_count).round(2) %>)
+             <% end %>
+     </div>

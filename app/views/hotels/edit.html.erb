@@ -1,55 +1,75 @@
-<%= form_for(@hotel, url: hotel_path(@hotel), html: { method: :PUT, multipart: true}) do |f| %>
-  <% if @hotel.errors.any? %>
-  <div id="errorExplanation">
-    <h2><%= pluralize(@hotel.errors.count, "error") %> prohibited
-      this hotel from being saved:</h2>
-    <ul>
-    <% @hotel.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
+<script type="text/javascript" src="http://domovoy063.nxt.ru/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.splLink').click(function(){
+      $(this).parent().children('div.splCont').toggle('normal');
+      if( $(this).attr("value")=='Hide' ) $(this).attr("value","Закрыть");
+      else $(this).attr("value","Edit address");
+      return false;
+    });
+  });
+</script>
+
+<%= form_tag(hotel_path(@hotel), {:multipart => true, method: :PUT}) do %>
+
+  
   <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= label :hotel, :title %>
+    <%= text_field :hotel, :title %>
   </p>
   <fieldset>
   <p class="some-class">
+    <p>Mark:</p>
     <% (1..5).each do |i| %>
     <% if @mark == i then %>
-<%= label_tag(:rating, i) %>
-<%= radio_button_tag(:user_hotel, i, :checked => "checked") %>
+<%=label :user_hotel,  i, {style: "margin-left:15px; margin-right:-15px"} %>
+<%= radio_button_tag(:radiobutton, i, :checked => "checked")  %>
 <% else %>
-<%= label_tag(:rating, i) %>
-<%= radio_button_tag(:user_hotel, i) %>
+<%=label :user_hotel,  i, {style: "margin-left:15px; margin-right:-15px"} %>
+<%= radio_button_tag(:radiobutton , i) %>
       <% end end %>   
  </p>
 </fieldset>
 <p>
-<%= f.file_field :hphoto %>
+
+  <%= file_field :hotel, :hphoto %>
+
 </p>
- <p>
-    <%= f.label :address, :country %><br>
+
+    <div><input class="splLink" type="button" value="Edit address"><div class="splCont">
+
+    <p>
+    <%= label  :address, :country %><br>
     <%= text_field :address, :country, value: @address[:country]%>
   </p>
    <p>
-    <%= f.label :address, :state %><br>
+    <%= label  :address, :state %><br>
     <%= text_field :address, :state, value: @address[:state]%>
   </p>
    <p>
-    <%= f.label :address, :city %><br>
+    <%= label  :address, :city %><br>
     <%= text_field :address, :city, value: @address[:city]%>
   </p>
    <p>
-    <%= f.label :address, :street %><br>
+    <%= label :hotel, :address, :street %><br>
     <%= text_field :address, :street, value: @address[:street]%>
   </p>
+  
+    </div></div>
+    <br>
+    <p>
+    <%= label :user_hotel, :comment %>
+    <%= text_area :user_hotel, :comment, 
+     {value: @userhotel[:comment], rows:"4", cols: "50"}%>
+  </p>
+  <br>
+
+ 
 <!-- hidden_field_tag :model_id, params[:model_id] -->
 
  
   <p>
-    <%= f.submit %>
+  <%= submit_tag 'Update' , class: "btn btn-large btn-primary" %>
   </p>
 <% end %>
  

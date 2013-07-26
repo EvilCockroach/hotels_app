@@ -1,7 +1,10 @@
 class HotelsController < ApplicationController
   def index
-    @hotels = Hotel.all
-    @hotelsordered = Hotel.order('star_rating/rates_count DESC').limit(5)
+    #@hotels = Hotel.all
+    @hotels = Hotel.order('star_rating/rates_count DESC')
+    @hotelsordered = @hotels.limit(5)
+    @otherhotels = @hotels.reverse[0..(@hotels.count - 6)].sort_by{|h| h.title}
+    #limit(@hotels.count - 5)
   end
 
   def show
@@ -17,7 +20,8 @@ class HotelsController < ApplicationController
       end
         end
       @address2 = @address2.join(", ")
-  
+  @userhotel = UserHotel.find_all_by_hotel_id(params[:id])
+  @rating = UserHotel.find_by_hotel_id_and_user_id(params[:id],current_user.id)[:rating]
    
   
   
@@ -50,29 +54,30 @@ end
 def edit
   @hotel = Hotel.find(params[:id])
 
-  @mark_ = UserHotel.find_by_hotel_id_and_user_id(params[:id], current_user.id)
-  if !@mark_.blank?  then                     
-                       @mark = @mark_[:rating] end
+  @userhotel = UserHotel.find_by_hotel_id_and_user_id(params[:id], current_user.id)
+  if !@userhotel.blank?  then                     
+                       @mark = @userhotel[:rating] end
   @address = Address.find_by_hotel_id(params[:id])
+  
 end
 
 def update 
 
   @hotel = Hotel.find(params[:id])
-  @hotel.hphoto = params[:file]
+  
 @userhotel = UserHotel.find_by_hotel_id_and_user_id(params[:id], current_user.id)
-@hotel.star_rating += (params[:user_hotel]).to_i
+@hotel.star_rating += (params[:radiobutton]).to_i
 @hotel.address = Address.find_by_hotel_id(params[:id])
 if !@userhotel.blank?
  @hotel.star_rating -= (@userhotel[:rating]).to_i
 else
- @userhotel = UserHotel.new(:rating => params[:user_hotel].to_i, :hotel_id => params[:id], :user_id => current_user.id)
+ @userhotel = UserHotel.new(:rating => params[:radiobutton].to_i, :hotel_id => params[:id], :user_id => current_user.id, :comment => params[:user_hotel][:comment])
 end
 
-  if (@hotel.update_attributes(:title => params[:hotel][:title], :star_rating => @hotel.star_rating) 
+  if (@hotel.update_attributes(:title => params[:hotel][:title], :star_rating => @hotel.star_rating, :hphoto => params[:hotel][:hphoto]) 
      @hotel.address.update_attributes(params[:address])
-  @userhotel.update_attributes(:rating => params[:user_hotel].to_i, :hotel_id => params[:id], :user_id => current_user.id))
-@hotel.save
+  @userhotel.update_attributes(:rating => params[:radiobutton].to_i, :hotel_id => params[:id], :user_id => current_user.id, :comment => params[:user_hotel][:comment]))
+
     flash[:success] = "Information updated"
     redirect_to @hotel
   else
