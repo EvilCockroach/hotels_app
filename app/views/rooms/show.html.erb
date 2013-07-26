@@ -11,6 +11,14 @@
       Room type: <%= @room.room_type %>
       <br>
       Price: <%= @room.price %>
-      
-  
+      <div>
+  <%= link_to " Back to the rooms list ", 
+            hotel_rooms_path(params[:hotel_id]) %>
+            <br>
+  <%= link_to " Back to the hotel ", 
+            hotel_path(params[:hotel_id]) %>
+            <br>
+  <%= link_to " Back to the hotels list ", 
+            hotels_path %>
+    	</div>
 </div>

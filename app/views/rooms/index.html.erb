@@ -12,7 +12,8 @@
         <div>
           <p>
             You can add a
-            <%= link_to " new room ", new_hotel_room %> to this list
+            <%= link_to " new room ", 
+            new_hotel_room_path(params[:hotel_id]) %> to this list
           </p>
         </div>
         
@@ -42,5 +43,9 @@
       	<% end %>
         </div>
       
-     
+     <%= link_to " Back to the hotel ", 
+            hotel_path(params[:hotel_id]) %>
+            <br>
+  <%= link_to " Back to the hotels list ", 
+            hotels_path %>
 
