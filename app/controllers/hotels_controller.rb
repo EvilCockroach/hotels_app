@@ -9,7 +9,7 @@ class HotelsController < ApplicationController
 
   def show
     @hotel = Hotel.find(params[:id])
-    #That's piece of code can be moved to view if needed
+    #This piece of code can be moved to view if needed 
    @address_attr = Address.find_by_hotel_id(params[:id]).attributes
      @address_ = {"country" => @address_attr['country'],
                 "state" => @address_attr['state'],
@@ -23,9 +23,10 @@ class HotelsController < ApplicationController
       @address2 = @address2.join(", ")
       ############################
       # I didnt know how to organize correctly many-to-many connection,
-      # so decided to save UserHotel separate
+      # so decided to save UserHotel separately from 
   @userhotel = UserHotel.find_all_by_hotel_id(params[:id])
   @curruserhotel = UserHotel.find_by_hotel_id_and_user_id(params[:id],current_user.id)
+   #used for having less code in view
    @rating = !@curruserhotel.nil? ? @curruserhotel[:rating] : 0
   
   
