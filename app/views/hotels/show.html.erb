@@ -9,10 +9,10 @@
           <p>Rating : <%=@hotel.star_rating/@hotel.rates_count%>
             (Your rating: <%=@rating%>)
           </p>
-         <% if !@address2.blank?     %>
+         <% if !@address.blank?     %>
       		<%=  "Address:" %>
 
-      		<%= @address2  %> 
+      		<%= @address  %> 
 		 	<%  else %>
 		 <%= "No address, sorry " %>	
      			<%  end %>	

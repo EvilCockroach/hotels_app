@@ -11,5 +11,8 @@ FactoryGirl.define do
     star_rating    	50
     rates_count 	1
     hphoto 			"15.jpeg"
+    #i couldn't understand how to push an adress to hotel,
+    #so hotel tests are broken now particularly
+    #address			{city: "Arkanzas"}
   end
 end

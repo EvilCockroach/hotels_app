@@ -9,18 +9,23 @@ class HotelsController < ApplicationController
 
   def show
     @hotel = Hotel.find(params[:id])
-    #This piece of code can be moved to view if needed 
-   @address_attr = Address.find_by_hotel_id(params[:id]).attributes
-     @address_ = {"country" => @address_attr['country'],
-                "state" => @address_attr['state'],
-                "city" => @address_attr['city'],
-                "street" => @address_attr['street'] }
-    @address2 = []
-    @address_.each do  |a|  
-      if !a[1].blank? then @address2.push(a[1])
+    #This piece of code was created to have commas between
+    #address parts and don't have it at the end of line as 
+    #it would be using simple loop in view
+   @address_attr = Address.find_by_hotel_id(params[:id])
+   @address2 = []
+     if !@address_attr.nil? then 
+                      @address_t = {"country" => @address_attr.attributes['country'],
+                "state" => @address_attr.attributes['state'],
+                "city" => @address_attr.attributes['city'],
+                "street" => @address_attr.attributes['street'] }
+    
+    @address_t.each do  |a,b|  
+      if !b.blank? then @address2.push(b)
       end
         end
-      @address2 = @address2.join(", ")
+      @address = @address2.join(", ")
+    end
       ############################
       # I didnt know how to organize correctly many-to-many connection,
       # so decided to save UserHotel separately from 
@@ -49,7 +54,7 @@ end
     @user_hotel = UserHotel.new(params[:user_hotel].merge(:hotel_id => @hotel[:id], :user_id => current_user.id))
     @user_hotel.save
     
-    
+    flash[:success] = "New hotel was added. Thank you"
     redirect_to @hotel
   else
     render :action => 'new'

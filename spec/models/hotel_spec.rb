@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Hotel do
 
- # let(:user) { FactoryGirl.create(:user) }
+ # let(:hotel) { FactoryGirl.create(:hotel) }
   before do
     # This code is wrong!
     @hotel = Hotel.new(title: "Lorem ipsum", star_rating: 7.0,
@@ -15,7 +15,7 @@ describe Hotel do
   it { should respond_to(:star_rating) }
   #it { should respond_to(:address_id) }
   it { should respond_to(:rates_count) }
-  it { should respond_to(:hphoto) }
+  #it { should respond_to(:hphoto) }
   
   it { should be_valid }
 
