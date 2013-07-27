@@ -5,4 +5,11 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation "foobar"
   end
+
+  factory :hotel do
+    title     		"Eldorado"
+    star_rating    	50
+    rates_count 	1
+    hphoto 			"15.jpeg"
+  end
 end

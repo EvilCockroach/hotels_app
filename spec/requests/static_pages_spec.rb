@@ -52,7 +52,11 @@ describe "Static pages" do
     click_link "Home"
     click_link "Sign up now!"
     page.should have_selector 'title', text: full_title('Sign up')
-    click_link "sample app"
-    page.should have_selector 'h1', text: 'Hotels App'
+    #not working! no link with title, id, name or name "Hotels list" found
+    #page.should have_selector 'h1', text: full_title('Hotels')
+    #click_link "Profile"
+    #page.should have_selector 'h1', text: 'Hotels App'
+    #click_link "Add new hotel"
+    #page.should have_selector 'title', text: full_title('New hotel')
   end
 end

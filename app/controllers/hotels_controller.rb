@@ -1,16 +1,17 @@
 class HotelsController < ApplicationController
   def index
-    #@hotels = Hotel.all
+    
     @hotels = Hotel.order('star_rating/rates_count DESC')
     @hotelsordered = @hotels.limit(5)
     @otherhotels = @hotels.reverse[0..(@hotels.count - 6)].sort_by{|h| h.title}
-    #limit(@hotels.count - 5)
+    
   end
 
   def show
     @hotel = Hotel.find(params[:id])
+    #That's piece of code can be moved to view if needed
    @address_attr = Address.find_by_hotel_id(params[:id]).attributes
-   @address_ = {"country" => @address_attr['country'],
+     @address_ = {"country" => @address_attr['country'],
                 "state" => @address_attr['state'],
                 "city" => @address_attr['city'],
                 "street" => @address_attr['street'] }
@@ -20,6 +21,9 @@ class HotelsController < ApplicationController
       end
         end
       @address2 = @address2.join(", ")
+      ############################
+      # I didnt know how to organize correctly many-to-many connection,
+      # so decided to save UserHotel separate
   @userhotel = UserHotel.find_all_by_hotel_id(params[:id])
   @curruserhotel = UserHotel.find_by_hotel_id_and_user_id(params[:id],current_user.id)
    @rating = !@curruserhotel.nil? ? @curruserhotel[:rating] : 0
