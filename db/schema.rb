@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724230915) do
+ActiveRecord::Schema.define(:version => 20130727060646) do
 
   create_table "addresses", :force => true do |t|
     t.string   "country"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20130724230915) do
     t.integer  "rates_count"
     t.string   "hphoto"
   end
+
+  add_index "hotels", ["title"], :name => "index_hotels_on_title", :unique => true
 
   create_table "photos", :force => true do |t|
     t.integer  "room_id"

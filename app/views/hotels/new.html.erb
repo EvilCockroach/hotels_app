@@ -7,14 +7,20 @@
 
 <%= form_tag(hotels_path, :multipart => true) do %>
 
-<p>
+<div style ="width:500px; height:35px">
+  
   Hotel title (necessary):
-  <%= text_field :hotel, :title %>
-</p>
-<p>
+
+
+<%= text_field :hotel, :title, :style => "float:right" %>
+</div>
+  
+  
+
+<div>
   Rate this hotel (necessary):
   <%= text_field :user_hotel, :rating %>
-</p>
+</div>
 <p>
   You can leave a short description
   <%= text_field :user_hotel, :comment %>

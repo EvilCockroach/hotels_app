@@ -21,8 +21,8 @@ class HotelsController < ApplicationController
         end
       @address2 = @address2.join(", ")
   @userhotel = UserHotel.find_all_by_hotel_id(params[:id])
-  @rating = UserHotel.find_by_hotel_id_and_user_id(params[:id],current_user.id)[:rating]
-   
+  @curruserhotel = UserHotel.find_by_hotel_id_and_user_id(params[:id],current_user.id)
+   @rating = !@curruserhotel.nil? ? @curruserhotel[:rating] : 0
   
   
 end

@@ -5,7 +5,7 @@ has_secure_password
 has_many :user_hotels
   has_many :hotels, through: :user_hotels
 
-  before_save { email.downcase! }
+  before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
  validates :name, 	presence: true, 
